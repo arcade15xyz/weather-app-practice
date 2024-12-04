@@ -1,0 +1,103 @@
+const userTab = document.querySelector("[userTab]");
+const searchTab = document.querySelector("[searchTab]");
+
+const grantLocation = document.querySelector("[grantLocation]");
+const searchForm = document.querySelector("[searchForm]");
+const loadingScreen = document.querySelector("[loadingScreen]");
+const showWeatherInfo = document.querySelector("[showWeatherInfo]");
+
+
+
+let currentTab = userTab;
+const API_KEY = 'd1845658f92b31c64bd94f06f7188c9c'
+currentTab.classList.add('currentTab');
+getfromSessionStorage();
+
+userTab.addEventListener('click',()=>{
+  switchingTabs(userTab);
+});
+
+searchTab.addEventListener('click',()=>{
+  switchingTabs(searchTab);
+});
+
+function switchingTabs(newTab){
+  if(newTab != currentTab){
+    currentTab.classList.remove('currentTab');
+    currentTab = newTab;
+    currentTab.classList.add('currentTab');
+    
+    if(!searchForm.classList.contains("active")){
+      showWeatherInfo.classList.remove("active");
+      grantLocation.classList.remove('active');
+      searchForm.classList.add('active');
+    }
+
+    else{
+      searchForm.classList.remove('active');
+      showWeatherInfo.classList.remove('active');
+
+      getfromSessionStorage();
+    }
+  }
+  
+};
+
+function getfromSessionStorage(){
+  const localCoordinates = sessionStorage.getItem('user-coordinates');
+  if(!localCoordinates){
+    grantLocation.classList.add('active');
+  }
+  else{
+    console.log(localCoordinates);
+    const coordinates = JSON.parse(localCoordinates);
+    fetchUserWeatherinfo(coordinates);
+  }
+}
+
+function showPosition(position){
+  const userCoordinates = {
+    lat: position.coords.latitude,
+    lon: position.coords.longitude
+  };
+  console.log(userCoordinates);
+  sessionStorage.setItem('user-coordinates', JSON.stringify(userCoordinates));
+  fetchUserWeatherinfo(userCoordinates);
+}
+
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(showPosition);
+    console.log(navigator.geolocation.getCurrentPosition(showPosition));
+  }
+  else{
+    //error
+  }
+}
+
+const grantAccess = document.querySelector('[grantAccess]');
+grantAccess.addEventListener('click',getLocation);
+
+
+async function fetchUserWeatherinfo(coordinates){
+  const {lat,lon} = coordinates;
+  grantAccess.classList.remove('active');
+  loadingScreen.classList.add('acitve');
+  try{
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+    const data = await response.json();
+    loadingScreen.classList.remove('active');
+    showWeatherInfo.classList.add('active');
+    renderWeatherInfo(data);
+  }
+  catch(err){
+    loadingScreen.classList.remove('active');
+  }
+}
+
+
+function renderWeatherInfo(data){
+  //
+}
+
+${data?.sys?.country.toLower()}

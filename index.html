@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+    <!--wrapper-->
+    <div class="w-[100vw] h-[100vh] " id="wrapper">
+        
+        
+        <div class="w-[100vw] h-[100vh] " >
+            <h1 class="text-center pt-4 text-6xl font-bold tracking-[2px] text-slate-300 ">Weather app</h1>
+
+            <!--switching tabs-->
+            <div class="mx-auto max-w-[70%] flex justify-between mt-2 p-2      switchingTabs">
+    
+                <!--your location weather-->
+                <button class="px-1 py-3 text-white rounded-md tracking-[2px] text-lg capitalize switch" userTab >
+                    your weather
+                </button>
+    
+                <!--search location-->
+                <button class="px-1 py-3 text-white rounded-md tracking-[2px] text-lg capitalize switch" searchTab>
+                    search weather
+                </button>
+    
+            </div>
+    
+            <!--generate location-->
+            <div class="flex flex-col items-center      grantLocation" grantLocation>
+                <img src="./assets/location.png" alt="" width="100px" class="mb-[2rem]">
+                <p class="text-4xl text-white capitalize">Grant Location Access</p>
+                <p class="text-2xl text-white capitalize">Allow Access to get weather Information</p>
+                <button class="text-xl px-14 py-4 rounded-3xl capitalize bg-blue-700 mt-3 text-white transition-all duration-75 hover:scale-105 hover:bg-blue-900" grantAccess>
+                    grant access
+                </button>
+            </div>
+    
+            <!-- search bar -->
+    
+            <form class="w-[70%] mx-auto max-w-[550px] justify-center items-center gap-3      formContainer"     searchForm>
+                <input  class=" " placeholder="search for location ..." searchInput>
+                <button type="submit" class="text-xl p-2 rounded-3xl capitalize bg-blue-700 text-white transition-all duration-75 hover:scale-105 hover:bg-blue-900 bg-contain">
+                    <img src="./assets/search.png" alt="" width="35px" height="35px" class="" loading="lazy">
+                </button>
+            </form>
+    
+            <!--Loading screen-->
+            <div class="flex flex-col items-center loadingContainer" loadingScreen>
+                <img src="./assets/loading.gif" alt="" width="150" height="150">
+                <p class="text-4xl text-white">Loading</p>
+            </div>
+    
+            <!--show weather info-->
+    
+            <div class="flex flex-col items-center     weatherInfo" showWeatherInfo>
+                <div class=" flex flex-col items-center w-[40%] mb-6 backdrop-blur-sm border-white border-2 rounded-lg">
+                    <!--city name and country flag-->
+                    <div class="flex gap-3 items-center py-6     ">
+                        <p class="text-5xl tracking-wide text-black"    cityName></p>
+                        <img countryIcon loading="lazy" width="70">
+                    </div>
+                
+                    <!--weather desc-->
+                    <p class="text-3xl tracking-wide text-black     "    weatherDesc></p>
+                    <!--weather icon-->
+                    <img     weatherIcon width="100" height="100">
+                    <!--temperature-->
+                    <div class="text-6xl font-bold tracking-wide pb-3 text-black"    temperature></div>
+    
+                </div>
+
+                <!--cards container-->
+                <div class=" flex items-center justify-center gap-4 w-full      parameterContainer">
+    
+                    <!--card1-->
+                    <div class=" p-4 max-w-[200px] w-[30%] flex flex-col items-center backdrop-blur-sm border-white border-2 rounded-lg    parameter">
+                        <img src="./assets/wind.png" alt="" width="50">
+                        <p class="text-xl tracking-wide text-white uppercase">wind speed</p>
+                        <p class="text-xl tracking-wide text-white uppercase" windspeed></p>
+                    </div>
+                    <!--card2-->
+                    <div class=" p-4 max-w-[200px] w-[30%] flex flex-col items-center backdrop-blur-sm border-white border-2 rounded-lg     parameter">
+                        <img src="./assets/humidity.png" alt="" width="50">
+                        <p class="text-xl tracking-wide text-white uppercase">humidity</p>
+                        <p class="text-xl tracking-wide text-white uppercase" humidity></p>
+                    </div>
+                    <!--card3-->
+                    <div class=" p-4 max-w-[200px] w-[30%] flex flex-col items-center backdrop-blur-sm border-white border-2 rounded-lg     parameter">
+                        <img src="./assets/cloud.png" alt="" width="50">
+                        <p class="text-xl tracking-wide text-white uppercase">clouds</p>
+                        <p class="text-xl tracking-wide text-white uppercase" clouds></p>
+                    </div> 
+    
+                </div>
+    
+            </div>
+    
+        </div>
+
+    </div>
+<script src="index.js"></script>
+</body>
+</html>
